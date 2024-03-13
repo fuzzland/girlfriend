@@ -1,0 +1,17 @@
+[comm]
+db_dir = "./db/"
+cache_dir = "./cache"
+output_dir = "./test"
+
+# The RPC provider should support the debug API like `debug_traceTransaction`.
+[rpc]
+eth_rpc_url = "https://docs-demo.quiknode.pro/"
+bsc_rpc_url = "https://docs-demo.bsc.quiknode.pro/"
+polygon_rpc_url = "https://docs-demo.matic.quiknode.pro/"
+arbitrum_rpc_url = "https://docs-demo.arbitrum-mainnet.quiknode.pro/"
+
+[scan]
+eth_scan_keys = []
+bsc_scan_keys = []
+polygon_scan_keys = []
+arbitrum_scan_keys = []

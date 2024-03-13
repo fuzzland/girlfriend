@@ -1,0 +1,141 @@
+// SPDX-License-Identifier: UNLICENSED
+pragma solidity ^0.8.13;
+
+import "forge-std/Test.sol";
+
+// https://explorer.phalcon.xyz/tx/{{chain_name}}/{{last_txhash}}
+// {{{sender_scan_url}}}
+
+{{#if struct_defs}}
+{{#each struct_defs}}
+struct {{this.name}} {
+    {{#each this.props}}
+    {{{this}}};
+    {{/each}}
+}
+{{/each}}
+
+{{/if}}
+{{#if interface}}
+interface I {
+{{#each interface}}
+    {{{this}}};
+{{/each}}
+}
+
+{{/if}}
+{{#each contracts}}
+contract {{name}} {{#if is_receiver}}is Test {{/if}}{
+    address immutable r = address(this);
+    receive() external payable {}
+{{#if is_receiver}}
+
+    {{setup_constructor.fn_def}} {
+        {{#each setup_constructor.fn_calls}}
+        {{{this}}}
+        {{/each}}
+    }
+
+{{/if}}
+    {{#each named_addresses}}
+    address constant {{@key}} = {{{this}}};
+    {{/each}}
+
+    {{#each ordered_sub_contracts}}
+    address {{var_name}};
+    {{/each}}
+{{#if counters}}
+
+    {{#each counters}}
+    uint256 {{this}} = 0;
+    {{/each}}
+{{/if}}
+{{#unless is_receiver}}
+    {{#if setup_constructor}}
+
+    {{setup_constructor.fn_def}} {
+        {{#each setup_constructor.fn_calls}}
+        {{{this}}}
+        {{/each}}
+    }
+    {{/if}}
+{{/unless}}
+{{#if is_receiver}}
+
+{{#if test2_calls}}
+    function test1() public {
+{{else}}
+    function test() public {
+{{/if}}
+        // vm.startPrank({{../sender}}, {{../sender}});
+    {{#if test1_calls}}
+
+    {{#each test1_calls}}
+        {{{this}}}
+    {{/each}}
+    {{/if}}
+    }
+
+{{#if test2_calls}}
+    function test2() public {
+        // vm.startPrank({{../sender}}, {{../sender}});
+
+    {{#each test2_calls}}
+        {{{this}}}
+    {{/each}}
+    }
+{{/if}}
+{{/if}}
+
+{{#each ordered_functions}}
+{{#if fn_def_signature}}
+    function {{fn_def_signature}} public {{#if payable}}payable {{/if}}{{#if ret_def_signature}}returns ({{{ret_def_signature}}}) {{/if}}{
+{{#if counter}}
+            {{counter}}++;
+
+    {{#each call_groups}}
+        if ({{../counter}} {{{cond}}}) {
+            {{#each calls}}
+            {{{this}}}
+            {{/each}}
+        {{#if outputs}}
+
+            {{#each outputs}}
+            {{{this}}}
+            {{/each}}
+        {{else}}
+            return;
+        {{/if}}
+        }
+    {{/each}}
+{{else}}
+    {{#with call_groups.0}}
+    {{#each calls}}
+        {{{this}}}
+    {{/each}}
+    {{#if outputs}}
+
+        {{#each outputs}}
+        {{{this}}}
+        {{/each}}
+    {{/if}}
+    {{/with}}
+{{/if}}
+    }
+{{/if}}
+
+{{/each}}
+    fallback() external payable {
+{{#if fallback}}
+        bytes4 selector = bytes4(msg.data);
+    {{#each fallback}}
+        if (selector == {{fn_selector}}) {
+            {{fn_signature}};
+            return;
+        }
+    {{/each}}
+{{/if}}
+        revert("no such function");
+    }
+}
+{{/each}}

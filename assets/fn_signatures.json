@@ -1,0 +1,62 @@
+{
+  "0x18160ddd": {
+    "fn_signature": "totalSupply()",
+    "ret_signature": "uint256"
+  },
+  "0x70a08231": {
+    "fn_signature": "balanceOf(address)",
+    "ret_signature": "uint256"
+  },
+  "0xdd62ed3e": {
+    "fn_signature": "allowance(address,address)",
+    "ret_signature": "uint256"
+  },
+  "0x017e7e58": {
+    "fn_signature": "feeTo()",
+    "ret_signature": "address"
+  },
+  "0x094b7415": {
+    "fn_signature": "feeToSetter()",
+    "ret_signature": "address"
+  },
+  "0xe6a43905": {
+    "fn_signature": "getPair(address,address)",
+    "ret_signature": "address"
+  },
+  "0x1e3dd18b": {
+    "fn_signature": "allPairs(uint256)",
+    "ret_signature": "address"
+  },
+  "0x574f2ba3": {
+    "fn_signature": "allPairsLength()",
+    "ret_signature": "uint256"
+  },
+  "0xc9c65396": {
+    "fn_signature": "createPair(address,address)",
+    "ret_signature": "address"
+  },
+  "0xc45a0155": {
+    "fn_signature": "factory()",
+    "ret_signature": "address"
+  },
+  "0x0dfe1681": {
+    "fn_signature": "token0()",
+    "ret_signature": "address"
+  },
+  "0xd21220a7": {
+    "fn_signature": "token1()",
+    "ret_signature": "address"
+  },
+  "0x0902f1ac": {
+    "fn_signature": "getReserves()",
+    "ret_signature": "(uint112,uint112,uint32)"
+  },
+  "0x6a627842": {
+    "fn_signature": "mint(address)",
+    "ret_signature": "uint256"
+  },
+  "0x89afcb44": {
+    "fn_signature": "burn(address)",
+    "ret_signature": "(uint256,uint256)"
+  }
+}
