@@ -85,3 +85,11 @@ We collected 74 historical attacks on ETH and 117 on BSC for backtesting. The co
 | ----- | ----- | ------- | ------------ |
 | ETH   | 74    | 24      | 32.43%       |
 | BSC   | 117   | 46      | 39.32%       |
+
+
+## Optimization item
+
+### The return value of a static call is now not handled efficiently. This may be used in the subsequent process.
+### The parsing of calldata/returndata should use recursion to decode.
+### Preparation for attack, gf now simply copy attacker txs in 3h. In fact, it can be handled more finely.
+### For handling loops, a more efficient approach should be adopted.
