@@ -29,3 +29,5 @@ Cargo.lock
 /test
 /bsc_back_test
 /eth_back_test
+/db/snap.*
+/lib
